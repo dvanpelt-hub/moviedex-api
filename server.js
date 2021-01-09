@@ -23,30 +23,29 @@ app.use(function validateBearerToken(req, res, next) {
   //Move to next middleware//
   next();
 });
-
 //Using the callback function "movieCall" to format response
 app.get("/movie", function movieCall(req, res) {
   let response = MOVIES;
   // filter our movies by genre if genre query param is present
   if (req.query.genre) {
-    response = response.filter((movie) => {
+    response = response.filter(movie => 
       // case insensitive searching
-      movie.genre.toLowerCase().includes(req.query.genre.toLowerCase());
-    });
+      movie.genre.toLowerCase().includes(req.query.genre.toLowerCase())
+    );
   }
   // filter our movies by country if country query param is present
   if (req.query.country) {
-    response = response.filter((movie) => {
+    response = response.filter(movie => 
       // case insensitive searching
-      movie.country.toLowerCase().includes(req.query.country.toLowerCase());
-    });
+      movie.country.toLowerCase().includes(req.query.country.toLowerCase())
+    );
   }
   if (req.query.avg_vote) {
     // filter our movies by avg_vote if avg_vote query param is present
-    response = response.filter((movie) => {
+    response = response.filter(movie => 
       //Using Number constructor to compare numerical value of avg_vote
-      Number(movie.avg_vote) >= Number(req.query.avg_vote);
-    });
+      Number(movie.avg_vote) >= Number(req.query.avg_vote)
+    );
   }
   res.json(response);
 });
